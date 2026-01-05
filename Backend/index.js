@@ -1,12 +1,16 @@
 import express from "express";
+import userrouts from "./src/Users/user.routs.js";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
 
 
 const server=express();
+server.use(express.json())
+server.use(cookieParser())
 
-
-server.get("/",(req,res,next)=>res.status(200).send("Server is Created..."))
+// server.get("/",(req,res,next)=>res.status(200).send("Server is Created..."))
+server.use("/api/user",userrouts);
 
 
 server.use((req, res, next) => {
