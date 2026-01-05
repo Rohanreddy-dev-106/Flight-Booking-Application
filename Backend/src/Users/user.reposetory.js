@@ -54,4 +54,19 @@ export default class Users {
         }
     }
 
+    //Update Profile 
+    async UpdateProfile(id, data) {
+        try {
+            const filterdata = {};
+            for (let key in data) {
+                filterdata[key] = data[key];
+            }
+            const update = await users.findByIdAndUpdate(id, { $set: filterdata }, { new: true });
+            return update;
+        } catch (error) {
+            console.log(error.message);
+
+        }
+    }
+
 }

@@ -79,6 +79,20 @@ export default class UserController {
             });
         }
     }
+    async Profileupdate(req, res, next) {
+        try {
+            const { data } = req.body;
+            const updatedprofile = await this._userrepository.UpdateProfile(data);
+            return res.status(500).send({
+                message: "Profile is updated.."
+            });
+        }
+        catch (err) {
+            return res.status(200).send({
+                message: "Profile is not updated.."
+            });
+        }
+    }
     async logout(req, res, next) {
         try {
             res.clearCookie("jwtToken", {
