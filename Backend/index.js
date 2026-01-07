@@ -1,5 +1,6 @@
 import express from "express";
 import userrouts from "./src/Users/user.routs.js";
+import FlightRouts from "./src/Flights_Management/flight.routs.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
@@ -11,6 +12,7 @@ server.use(cookieParser())
 
 // server.get("/",(req,res,next)=>res.status(200).send("Server is Created..."))
 server.use("/api/user",userrouts);
+server.use("/api/flights",FlightRouts);
 
 
 server.use((req, res, next) => {

@@ -57,7 +57,7 @@ export default class Users {
     //Update Profile 
     async UpdateProfile(id, data) {
         try {
-            const filterdata = {};
+            const filterdata = {};//safe update
             for (let key in data) {
                 filterdata[key] = data[key];
             }
