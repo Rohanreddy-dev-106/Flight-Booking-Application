@@ -41,6 +41,7 @@ const FlightSchema = new Schema({
         max: [180, "Seats cannot exceed 180"],
         required: [true, "Total seats are required"]
     },
+    price: { type: Number, min: 1000, max: 10000, required: true },
     Howcreated: {
         type: String,
         trim: true,
