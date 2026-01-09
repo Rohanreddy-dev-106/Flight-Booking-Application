@@ -74,14 +74,29 @@ export default class Flight {
         }
     }
     //private
-
     async AddSets(data) {
         try {
-            const Sets = new seatsSchema(data);
-            await Sets.save();
+            const seat = new seatsSchema(data);
+            const sid = await seat.save();
+            return sid_id;
         } catch (error) {
             console.log(error.message);
 
         }
     }
+
+    async pushSEATS(flightId, seatId) {
+        try {
+            return await Flightmodel.findByIdAndUpdate(
+                flightId,
+                { $addToSet: { Seats: seatId } },
+                { new: true }
+            );
+        }
+        catch (err) {
+            console.log(err.message);
+
+        }
+    }
+
 }

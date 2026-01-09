@@ -94,17 +94,21 @@ export default class FlightController {
         }
     }
 
-    //ADD SEATS
+    // ADD SEATS
     async Add(req, res, next) {
         try {
             const data = req.body;
 
-            const addsets = await this._Flightrepo.AddSets(data);
+
+            const seatId = await this._Flightrepo.AddSets(data);
+
+
+            await this._Flightrepo.pushSEATS(data.flightId, seatId);
 
             return res.status(201).json({
                 success: true,
-                message: "Seats added successfully",
-                data: addsets
+                message: "Seat added and linked to flight successfully",
+                seatId
             });
 
         } catch (error) {
@@ -112,6 +116,5 @@ export default class FlightController {
 
         }
     }
-
 
 }

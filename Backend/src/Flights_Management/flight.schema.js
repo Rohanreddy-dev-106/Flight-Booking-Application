@@ -42,6 +42,7 @@ const FlightSchema = new Schema({
         required: [true, "Total seats are required"]
     },
     price: { type: Number, min: 1000, max: 10000, required: true },
+    Seats: { type: [mongoose.Schema.Types.ObjectId], ref: "seats", required: true },
     Howcreated: {
         type: String,
         trim: true,
