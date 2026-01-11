@@ -5,6 +5,8 @@ const UsersSchema = new Schema(
         name: {
             type: String,
             required: true,
+            unique: true,      // unique: true ensures that each email and username can be registered only once
+            // Removing it will allow duplicate users in the database
             trim: true
         },
 
