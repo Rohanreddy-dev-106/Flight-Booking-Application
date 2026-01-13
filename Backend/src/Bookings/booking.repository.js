@@ -125,7 +125,20 @@ export default class BookingRepo {
 
     //Admin api
 
-    async Cancellation(Booking_id,payment_id,seatid=[]){
+    async  Cancellation(bookingId, paymentId, seatIds = []) {
+    await Bookingmodel.findByIdAndDelete(bookingId);
 
-    }
+    await Paymentmodel.findByIdAndDelete(paymentId);
+
+    await SeatsModel.updateMany(
+        { _id: { $in: seatIds } },
+        {
+            $set: {
+                status: "available",
+                bookedBy: null
+            }
+        }
+    );
+}
+
 }

@@ -43,13 +43,23 @@ export default class BookingFlights {
                 });
             }
 
-            const payment = await this._bookingrepo.payment(data,data.Booking);
+            const payment = await this._bookingrepo.payment(data, data.Booking);
 
             return res.status(201).json({
                 success: true,
                 message: "Payment created successfully",
                 data: payment,
             });
+        } catch (error) {
+            console.log(error.message);
+
+        }
+    }
+    async cancelbooking(req, res, next) {
+        try {
+            const { bid, pid } = req.body;
+            await this._bookingrepo.Cancellation(bid, pid)
+            return res.status(200).send("canceled.... ok")
         } catch (error) {
             console.log(error.message);
 
