@@ -1,17 +1,58 @@
-import bookingrepo from "./booking.repository.js"
+import BookingRepo from "./booking.repository.js";
 
-export default class BookingFlights{
+export default class BookingFlights {
     _bookingrepo;
-    constructor(){
-        this._bookingrepo=new bookingrepo;
-    }
-    async CreateBooking(req,res,next){
 
+    constructor() {
+        this._bookingrepo = new BookingRepo();
     }
-    async PaymentCreate(req,res,next){
 
+    // Create a new booking
+    async CreateBooking(req, res, next) {
+        try {
+            const data = req.body;
+
+            if (!data) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Booking data is required",
+                });
+            }
+
+            const booking = await this._bookingrepo.creatbooking(data);
+
+            return res.status(201).json({
+                success: true,
+                message: "Booking created successfully",
+                data: booking,
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
     }
-     async CancalBooking(req,res,next){
 
+    // Create payment for a booking
+    async PaymentCreate(req, res, next) {
+        try {
+            const data = req.body;
+
+            if (!data) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Payment data is required",
+                });
+            }
+
+            const payment = await this._bookingrepo.payment(data,data.Booking);
+
+            return res.status(201).json({
+                success: true,
+                message: "Payment created successfully",
+                data: payment,
+            });
+        } catch (error) {
+            console.log(error.message);
+
+        }
     }
 }

@@ -7,12 +7,12 @@ const BookingSchema = new Schema({
         required: true
     },
     Seat: {
-        type: String,
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "seat",
         required: true
     },
     Cost: {
-        type: Number,
-        required: true
+        type: Number
     },
     Status: {
         type: String,
@@ -20,7 +20,7 @@ const BookingSchema = new Schema({
         default: "Pending"
     },
     User: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "users",
         required: true
     },
@@ -29,6 +29,6 @@ const BookingSchema = new Schema({
         default: Date.now
     },
 
-}, { timestamps: true }) ;
+}, { timestamps: true });
 
-export default mongoose.model("Booking",BookingSchema);
+export default mongoose.model("booking", BookingSchema);

@@ -3,7 +3,6 @@ import mongoose, { Schema } from "mongoose";
 const PaymentSchema = new Schema({
     Amount: {
         type: Number,
-        required: true
     },
     Currency: {
         type: String,

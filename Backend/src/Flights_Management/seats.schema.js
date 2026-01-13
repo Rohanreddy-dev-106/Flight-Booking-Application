@@ -51,4 +51,4 @@ const SeatsSchema = new Schema(
 );
 
 
-export default mongoose.model("Seat", SeatsSchema);
+export default mongoose.model("seat", SeatsSchema);
