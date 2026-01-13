@@ -7,7 +7,7 @@ const FlightRouts = express.Router();
 const flight = new FlightController();
 
 
-FlightRouts.post("/create", jwtAuth,AccessControl("admin"), (req, res, next) => {
+FlightRouts.post("/create", jwtAuth, AccessControl("admin"), (req, res, next) => {
     flight.create(req, res, next);
 })
 
@@ -25,7 +25,7 @@ FlightRouts.get("/read", (req, res, next) => {
 })
 
 
-FlightRouts.delete("/delete/:id", jwtAuth,AccessControl("admin"), (req, res, next) => {
+FlightRouts.delete("/delete/:id", jwtAuth, AccessControl("admin"), (req, res, next) => {
     flight.delete(req, res, next);
 })
 
@@ -35,7 +35,10 @@ FlightRouts.get("/search", (req, res, next) => {
     flight.search(req, res, next);
 });
 
-FlightRouts.post("/seats-add",(req,res,next)=>flight.Add(req,res,next))
+FlightRouts.post("/seats-add", jwtAuth, AccessControl("admin"), (req, res, next) => flight.Add(req, res, next));
+
+FlightRouts.get("/available-seats/:flightId", jwtAuth, AccessControl("admin", "users"), (req, res, next) => flight.getTotalAvailableSeats(req, res, next));
+
 
 
 export default FlightRouts;

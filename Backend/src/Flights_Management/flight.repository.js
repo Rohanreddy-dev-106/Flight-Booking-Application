@@ -99,4 +99,20 @@ export default class Flight {
         }
     }
 
+    //Total seat count in a flight
+    async TotalAvalibleSeats(flight_id) {
+        try {
+            let filter = {
+                flight: flight_id,
+                status: "booked"
+            }
+            const TotalBookedSeates = await seatsSchema.countDocuments(filter);
+            const TotalSeats = await seatsSchema.countDocuments({ flight: flight_id });
+            const available_Seats = await seatsSchema.countDocuments({ flight: flight_id }) - TotalBookedSeates;
+            return { TotalSeats, TotalBookedSeates, available_Seats };
+        } catch (error) {
+            console.log(error.message);
+
+        }
+    }
 }

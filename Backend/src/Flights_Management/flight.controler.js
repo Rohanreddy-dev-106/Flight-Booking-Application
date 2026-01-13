@@ -26,7 +26,7 @@ export default class FlightController {
     async update(req, res, next) {
         try {
             const { id } = req.params;
-            
+
             const data = await this._Flightrepo.Find(id);
 
             if (!data) {
@@ -37,7 +37,7 @@ export default class FlightController {
             if (data.Howcreated.toString() !== req.user.UserID.toString()) {
                 return res.status(403).json({ message: "Not authorized" });
             }
-            
+
             const result = await this._Flightrepo.UpdateFlight(id, req.body);
 
             if (!result) {
@@ -67,9 +67,9 @@ export default class FlightController {
     async delete(req, res, next) {
         try {
             const { id } = req.params;
-            
+
             const data = await this._Flightrepo.Find(id);
-            
+
             if (!data) {
                 return res.status(404).json({ message: "Flight not found" });
             }
@@ -78,7 +78,7 @@ export default class FlightController {
             if (data.Howcreated.toString() !== req.user.UserID.toString()) {
                 return res.status(403).json({ message: "Not authorized to delete this flight" });
             }
-            
+
             const result = await this._Flightrepo.DeleatFlight(id);
 
             if (!result) {
@@ -129,4 +129,22 @@ export default class FlightController {
             return res.status(500).json({ message: "Failed to add seat" });
         }
     }
+    async getTotalAvailableSeats(req, res, next) {
+        try {
+            const { flightId } = req.params;
+
+            const availableSeats = await this._Flightrepo.TotalAvalibleSeats(flightId);
+
+            return res.status(200).json({
+                success: true,
+                availableSeats
+            });
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: error.message
+            });
+        }
+    };
+
 }
