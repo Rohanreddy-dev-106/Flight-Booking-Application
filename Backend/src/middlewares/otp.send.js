@@ -21,8 +21,8 @@ async function SendOtp(req, res, next) {
             port: 587,
             secure: false,
             auth: {
-                user:"rosemarie.hansen44@ethereal.email",
-                pass: "KEXB61kpHuH7D9jzJ6",
+                user:"kay25@ethereal.email",
+                pass: "KcNg5SRKDXdYsuUBGf",
             },
         });
 

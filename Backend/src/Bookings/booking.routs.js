@@ -6,12 +6,12 @@ const bookingrouts = express.Router();
 
 //Booking rout
 const bookingControler = new BookingFlights();
-bookingrouts.post("/booking", jwtAuth, AccessControl("users", "admin"), (req, res, next) => {
+bookingrouts.post("/booking", jwtAuth, AccessControl("user", "admin"), (req, res, next) => {
 bookingControler.CreateBooking(req,res,next);
 })
 
 //Payment rout
-bookingrouts.post("/payment", jwtAuth, AccessControl("users", "admin"), (req, res, next) => {
+bookingrouts.post("/payment", jwtAuth, AccessControl("user", "admin"), (req, res, next) => {
 bookingControler.PaymentCreate(req,res,next);
 })
 

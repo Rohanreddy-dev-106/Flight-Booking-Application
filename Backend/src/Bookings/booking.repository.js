@@ -53,6 +53,8 @@ export default class BookingRepo {
 
             if (this.HelpingMethod()) {
                 payment.Status = "Success";
+                booking.Status="Booked";
+                booking.save();
                 const payID = await payment.save();
 
                 return {
@@ -63,6 +65,8 @@ export default class BookingRepo {
             } else {
                 payment.Status = "Failed";
                 await payment.save();
+                 booking.Status="Cancelled";
+                booking.save();
 
                 // Cancel booking
                 await Bookingmodel.findByIdAndUpdate(
