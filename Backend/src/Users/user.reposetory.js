@@ -73,7 +73,7 @@ export default class Users {
     }
     async clearToken(id) {
         try {
-            return await users.findByIdAndUpdate(id, { $set: { refreshToken: "NULL" } })
+            return await users.findByIdAndUpdate(id, {  $unset: { refreshToken: " " } })
         }
         catch (err) {
             console.log(err.message);
